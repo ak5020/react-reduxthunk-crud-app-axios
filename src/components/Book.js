@@ -6,8 +6,8 @@ const Book = ({ book }) => {
       <tr>
         <td>{book.id}</td>
         <td>{book.title}</td>
-        <td>{book.author}</td>
-        <td>{book.year}</td>
+        <td>{book.body}</td>
+        {/* <td>{book.year}</td> */}
         <td>
           <button type="button" className="btn btn-success">
             Edit

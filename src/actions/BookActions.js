@@ -15,8 +15,7 @@ import {
 
 import axios from "axios";
 
-const url =
-  "https://github.com/ak5020/react-reduxthunk-crud-app-axios/blob/main/src/db.json";
+const url = "https://jsonplaceholder.typicode.com/posts";
 
 export const fetchBooksSuccess = (data) => {
   return {
@@ -25,17 +24,42 @@ export const fetchBooksSuccess = (data) => {
   };
 };
 
+export const fetchBooksLoading = (data) => {
+  return {
+    type: "FETCH_BOOK_LOADING",
+    payload: data
+  };
+};
+
+export const fetchBooksError = (data) => {
+  console.log("error", data);
+  return {
+    type: "FETCH_BOOK_ERROR",
+    payload: data
+  };
+};
+
 export const fetchBooks = () => {
+  let isLoading = true;
+
   return (dispatch) => {
+    dispatch(fetchBooksLoading(isLoading));
     return axios
       .get(url)
       .then((response) => {
-        console.log("fetch data", response);
+        // console.log("fetch data", response);
         const data = response.data;
         dispatch(fetchBooksSuccess(data));
+        isLoading = false;
+        dispatch(fetchBooksLoading(isLoading));
       })
       .catch((error) => {
-        console.log(error);
+        const errorPayload = {};
+        errorPayload["message"] = error.message;
+        errorPayload["status"] = error.response.status;
+        dispatch(fetchBooksError(errorPayload));
+        isLoading = false;
+        dispatch(fetchBooksLoading(isLoading));
       });
   };
 };
