@@ -3,18 +3,18 @@
     "id": 1,
     "title": "Post 1",
     "author": "Jon",
-    "Year": "2019"
+    "year": "2019"
   },
   {
     "id": 2,
     "title": "Post 2",
     "author": "Kayle",
-    "Year": "2018"
+    "year": "2018"
   },
   {
     "id": 3,
     "title": "Post 3",
     "author": "Eddi",
-    "Year": "2021"
+    "year": "2021"
   }
 ]

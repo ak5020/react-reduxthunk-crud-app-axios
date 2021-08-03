@@ -15,7 +15,8 @@ import {
 
 import axios from "axios";
 
-const url = "https://jsonplaceholder.typicode.com/posts";
+const url =
+  "https://github.com/ak5020/react-reduxthunk-crud-app-axios/blob/main/src/db.json";
 
 export const fetchBooksSuccess = (data) => {
   return {
