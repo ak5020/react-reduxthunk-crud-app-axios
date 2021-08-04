@@ -14,9 +14,52 @@ import {
 } from "./types";
 
 import axios from "axios";
+import { history } from "../index";
 
 const url = "https://jsonplaceholder.typicode.com/posts";
 
+// Create Action Creators
+export const createBookSuccess = (data) => {
+  return {
+    type: "ADD_BOOK_SUCCESS",
+    payload: data
+  };
+};
+
+export const createBook = (book) => {
+  const data = {
+    title: book.title,
+    body: book.body
+  };
+  return (dispatch) => {
+    return axios
+      .post(url, data)
+      .then((response) => {
+        const id = response.data;
+        console.log(id);
+        axios
+          .get(`/${url}/${id}`)
+          .then((response) => {
+            const data = response.data;
+            // const normalizedData = {
+            //   id: data.id,
+            //   title: data.title,
+            //   body: data.body,
+            // }
+            dispatch(createBookSuccess(data));
+            history.push("/");
+          })
+          .catch((error) => {
+            console.log("normalized catch box error", error);
+          });
+      })
+      .catch((error) => {
+        console.log("post catch box error", error);
+      });
+  };
+};
+
+// Create Fetch Action Creators
 export const fetchBooksSuccess = (data) => {
   return {
     type: "FETCH_BOOK_SUCCESS",
